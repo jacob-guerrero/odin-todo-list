@@ -1,0 +1,1 @@
+(()=>{const o=(o,t,e,i)=>({title:o,description:t,dueDate:e,priority:i,sayTask:()=>{console.log({title:o,description:t,dueDate:e,priority:i})}}),t=[];((o,...t)=>{o.push(...t)})(t,o("run","go to the park","1/1/11","high"),o("jump","go to the city","1/2/11","low"),o("walk","go to the mall","4/1/31","medium")),console.log(t)})();
