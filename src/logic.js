@@ -23,7 +23,7 @@ addTask(project, firstTask, secondTask, thirdTask);
 console.log(project);
 project[0].sayTask();
 
-const project1 = createProject("firstProject");
+const project1 = createProject();
 const firstTask1 = createTodo("dance", "go to the park", "1/1/11", "high");
 const secondTask1 = createTodo("sew", "go to the city", "1/2/11", "low");
 const thirdTask1 = createTodo("sleep", "go to the mall", "4/1/31", "medium");
