@@ -6,13 +6,18 @@ const createTodo = (title, description, dueDate, priority) => {
 };
 
 const addTask = (project, ...task) => {
-  return project.push(...task);
+  project.push(...task);
 };
 
 const createProject = () => {
   return [];
 };
 
+const addProject = () => {
+  projects.push(createProject());
+};
+
+const projects = [];
 const project = [];
 
 const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
@@ -31,4 +36,4 @@ addTask(project1, firstTask1, secondTask1, thirdTask1);
 
 console.log(project1);
 
-export { createTodo, addTask, createProject };
+export { createTodo, addTask, createProject , addProject, projects};
