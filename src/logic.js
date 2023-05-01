@@ -19,6 +19,7 @@ const addProject = () => {
 
 const projects = [];
 const project = [];
+projects.push(project);
 
 const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
 const secondTask = createTodo("jump", "go to the city", "1/2/11", "low");
