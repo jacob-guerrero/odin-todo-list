@@ -115,7 +115,19 @@ btnAddProject.addEventListener("click", (e) => {
   const projectName = document.querySelector("#project").value;
   createProjectElement(projectName);
   addProject();
+  onclickTodo();
   console.log(projects);
 });
+
+const onclickTodo = () => {
+  const btnAddTodo = document.querySelector(".add-todo");
+  btnAddTodo.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    createTodoElement();
+    // addTodo();
+    // console.log(projects);
+  });
+};
 
 export { btn };
