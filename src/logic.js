@@ -19,36 +19,39 @@ const createProject = () => {
   return [];
 };
 
-const addProject = () => {
-  projects.push(createProject());
+const addProject = (project) => {
+  projects.push(project);
 };
 
 const projects = [];
-const project = [];
-projects.push(project);
 
-const btnAddProject = document.querySelector(".add-project");
-btnAddProject.addEventListener("click", (e) => {
-  e.preventDefault();
+const onclickProjectBtn = (() => {
+  const btnAddProject = document.querySelector(".add-project");
 
-  createProjectElement();
-  addProject();
-  onclickTodoForm();
-  console.log(projects);
-});
+  btnAddProject.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    createProjectElement();
+    addProject(createProject());
+    onclickTodoForm();
+    console.log(projects);
+  });
+})();
 
 const onclickTodoForm = () => {
   const btnAddTodoForm = document.querySelector(".add-todo-form");
+
   btnAddTodoForm.addEventListener("click", (e) => {
     e.preventDefault();
 
     createTodoForm();
-    onclickTodo();
+    onclickTodoBtn();
   });
 };
 
-const onclickTodo = () => {
+const onclickTodoBtn = () => {
   const btnAddTodo = document.querySelector(".add-todo");
+  
   btnAddTodo.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -72,5 +75,8 @@ const thirdTask1 = createTodo("sleep", "go to the mall", "4/1/31", "medium");
 addTask(project1, firstTask1, secondTask1, thirdTask1);
 
 console.log(project1); */
+
+// Default:
+document.querySelector(".add-project").click();
 
 export { createTodo, addTask, createProject, addProject, projects };

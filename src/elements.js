@@ -1,7 +1,9 @@
 const container = document.querySelector("#content");
 
 const createProjectElement = () => {
-  const projectName = document.querySelector("#project").value;
+  let projectName = document.querySelector("#project").value;
+
+  if (projectName === "") {projectName = "Project"};
 
   const divProject = document.createElement("div");
   divProject.classList.add("project");
