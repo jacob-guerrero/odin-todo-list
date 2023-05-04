@@ -1,18 +1,21 @@
-import {
-  createTodo,
-  addTask,
-  createProject,
-  addProject,
-  projects,
-} from "./logic";
-
 const container = document.querySelector("#content");
 
-const btn = document.createElement("button");
-btn.textContent = "Change Me";
-container.append(btn);
+const createProjectElement = () => {
+  const projectName = document.querySelector("#project").value;
 
-const createTodoElement = () => {
+  const divProject = document.createElement("div");
+  divProject.classList.add("project");
+  const titleProject = document.createElement("h2");
+  titleProject.textContent = projectName;
+  const btnAddTodo = document.createElement("button");
+  btnAddTodo.classList.add("add-todo-form");
+  btnAddTodo.textContent = "+";
+
+  divProject.append(titleProject, btnAddTodo);
+  container.append(divProject);
+};
+
+const createTodoForm = () => {
   const divTodo = document.createElement("div");
   divTodo.classList.add("show-todo");
   divTodo.setAttribute("id", "myTodo");
@@ -95,64 +98,26 @@ const createTodoElement = () => {
   container.append(divTodo);
 };
 
-const createProjectElement = (projectName) => {
-  const divProject = document.createElement("div");
-  divProject.classList.add("project");
-  const titleProject = document.createElement("h2");
-  titleProject.textContent = projectName;
-  const btnAddTodo = document.createElement("button");
-  btnAddTodo.classList.add("add-todo-form");
-  btnAddTodo.textContent = "+";
-
-  divProject.append(titleProject, btnAddTodo);
-  container.append(divProject);
-};
-
-const btnAddProject = document.querySelector(".add-project");
-btnAddProject.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  const projectName = document.querySelector("#project").value;
-  createProjectElement(projectName);
-  addProject();
-  onclickTodoForm();
-  console.log(projects);
-});
-
-const onclickTodo = (btnAddTodoForm) => {
-  const btnAddTodo = document.querySelector('.add-todo');
-  btnAddTodo.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const todoName = document.querySelector('#todo').value;
-    const todoDesc = document.querySelector('#todo-desc').value;
-    const todoDate = document.querySelector('#todo-date').value;
-    const todoPrior = document.querySelector('#todo-prior').value;
-  
-    const divTodo = document.createElement("div");
-    divTodo.classList.add("todo");
-    const titleTodo = document.createElement("h3");
-    titleTodo.textContent = todoName;
-    const descriptionTodo = document.createElement("p");
-    descriptionTodo.textContent = todoDesc;
-    const dateTodo = document.createElement("p");
-    dateTodo.textContent = todoDate;
-    const priorTodo = document.createElement("p");
-    priorTodo.textContent = todoPrior;
-  
-    divTodo.append(titleTodo, descriptionTodo, dateTodo, priorTodo)
-    document.querySelector('.project').insertBefore(divTodo, btnAddTodoForm);
-  })
-}
-
-const onclickTodoForm = () => {
+const createTodoElement = () => {
   const btnAddTodoForm = document.querySelector(".add-todo-form");
-  btnAddTodoForm.addEventListener("click", (e) => {
-    e.preventDefault();
 
-    createTodoElement();
-    onclickTodo(btnAddTodoForm);
-  });
+  const todoName = document.querySelector("#todo").value;
+  const todoDesc = document.querySelector("#todo-desc").value;
+  const todoDate = document.querySelector("#todo-date").value;
+  const todoPrior = document.querySelector("#todo-prior").value;
+
+  const divTodo = document.createElement("div");
+  divTodo.classList.add("todo");
+  const titleTodo = document.createElement("h3");
+  titleTodo.textContent = todoName;
+  const descriptionTodo = document.createElement("p");
+  descriptionTodo.textContent = todoDesc;
+  const dateTodo = document.createElement("p");
+  dateTodo.textContent = todoDate;
+  const priorTodo = document.createElement("p");
+  priorTodo.textContent = todoPrior;
+
+  divTodo.append(titleTodo, descriptionTodo, dateTodo, priorTodo);
+  document.querySelector(".project").insertBefore(divTodo, btnAddTodoForm);
 };
-
-export { btn };
+export { createProjectElement, createTodoForm, createTodoElement };

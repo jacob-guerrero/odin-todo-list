@@ -1,3 +1,9 @@
+import {
+  createProjectElement,
+  createTodoForm,
+  createTodoElement,
+} from "./elements";
+
 const createTodo = (title, description, dueDate, priority) => {
   const sayTask = () => {
     console.log({ title, description, dueDate, priority });
@@ -21,7 +27,37 @@ const projects = [];
 const project = [];
 projects.push(project);
 
-const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
+const btnAddProject = document.querySelector(".add-project");
+btnAddProject.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  createProjectElement();
+  addProject();
+  onclickTodoForm();
+  console.log(projects);
+});
+
+const onclickTodoForm = () => {
+  const btnAddTodoForm = document.querySelector(".add-todo-form");
+  btnAddTodoForm.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    createTodoForm();
+    onclickTodo();
+  });
+};
+
+const onclickTodo = () => {
+  const btnAddTodo = document.querySelector(".add-todo");
+  btnAddTodo.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    createTodoElement();
+    console.log(projects);
+  });
+};
+
+/* const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
 const secondTask = createTodo("jump", "go to the city", "1/2/11", "low");
 const thirdTask = createTodo("walk", "go to the mall", "4/1/31", "medium");
 addTask(project, firstTask, secondTask, thirdTask);
@@ -35,6 +71,6 @@ const secondTask1 = createTodo("sew", "go to the city", "1/2/11", "low");
 const thirdTask1 = createTodo("sleep", "go to the mall", "4/1/31", "medium");
 addTask(project1, firstTask1, secondTask1, thirdTask1);
 
-console.log(project1);
+console.log(project1); */
 
-export { createTodo, addTask, createProject , addProject, projects};
+export { createTodo, addTask, createProject, addProject, projects };
