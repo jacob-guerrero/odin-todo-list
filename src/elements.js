@@ -3,7 +3,9 @@ const container = document.querySelector("#content");
 const createProjectElement = () => {
   let projectName = document.querySelector("#project").value;
 
-  if (projectName === "") {projectName = "Project"};
+  if (projectName === "") {
+    projectName = "Project";
+  }
 
   const divProject = document.createElement("div");
   divProject.classList.add("project");
@@ -121,5 +123,7 @@ const createTodoElement = () => {
 
   divTodo.append(titleTodo, descriptionTodo, dateTodo, priorTodo);
   document.querySelector(".project").insertBefore(divTodo, btnAddTodoForm);
+
+  return {todoName, todoDesc, todoDate, todoPrior};
 };
 export { createProjectElement, createTodoForm, createTodoElement };

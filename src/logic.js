@@ -32,8 +32,8 @@ const onclickProjectBtn = (() => {
     e.preventDefault();
 
     createProjectElement();
-    addProject(createProject());
     onclickTodoForm();
+    addProject(createProject());
     console.log(projects);
   });
 })();
@@ -51,11 +51,18 @@ const onclickTodoForm = () => {
 
 const onclickTodoBtn = () => {
   const btnAddTodo = document.querySelector(".add-todo");
-  
+
   btnAddTodo.addEventListener("click", (e) => {
     e.preventDefault();
 
-    createTodoElement();
+    const todoElement = createTodoElement();
+    const todo = createTodo(
+      todoElement.todoName,
+      todoElement.todoDesc,
+      todoElement.todoDate,
+      todoElement.todoPrior
+    );
+    projects[0].push(todo);
     console.log(projects);
   });
 };
