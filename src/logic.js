@@ -39,19 +39,22 @@ const onclickProjectBtn = (() => {
 })();
 
 const onclickTodoForm = () => {
-  const btnAddTodoForm = document.querySelector(".add-todo-form");
+  const btnAddTodoForm = document.querySelectorAll(".add-todo-form");
 
-  btnAddTodoForm.addEventListener("click", (e) => {
-    e.preventDefault();
+  btnAddTodoForm.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    createTodoForm();
-    onclickTodoBtn();
+      createTodoForm(e);
+      onclickTodoBtn();
+    });
   });
 };
 
 const onclickTodoBtn = () => {
   const btnAddTodo = document.querySelector(".add-todo");
 
+  //Fix query selector when +2
   btnAddTodo.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -84,6 +87,6 @@ addTask(project1, firstTask1, secondTask1, thirdTask1);
 console.log(project1); */
 
 // Default:
-document.querySelector(".add-project").click();
+//document.querySelector(".add-project").click();
 
 export { createTodo, addTask, createProject, addProject, projects };

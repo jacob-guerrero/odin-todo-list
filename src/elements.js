@@ -1,3 +1,5 @@
+import { projects } from "./logic";
+
 const container = document.querySelector("#content");
 
 const createProjectElement = () => {
@@ -9,17 +11,19 @@ const createProjectElement = () => {
 
   const divProject = document.createElement("div");
   divProject.classList.add("project");
+  divProject.dataset.projectId = projects.length;
   const titleProject = document.createElement("h2");
   titleProject.textContent = projectName;
   const btnAddTodo = document.createElement("button");
   btnAddTodo.classList.add("add-todo-form");
+  btnAddTodo.dataset.projectBtnId = projects.length;
   btnAddTodo.textContent = "+";
 
   divProject.append(titleProject, btnAddTodo);
   container.append(divProject);
 };
 
-const createTodoForm = () => {
+const createTodoForm = (e) => {
   const divTodo = document.createElement("div");
   divTodo.classList.add("show-todo");
   divTodo.setAttribute("id", "myTodo");
@@ -98,8 +102,11 @@ const createTodoForm = () => {
     inputPriority,
     btnContainer
   );
+
+  const divProjectContainer = e.target.parentElement;
+
   divTodo.append(formTodo);
-  container.append(divTodo);
+  divProjectContainer.append(divTodo);
 };
 
 const createTodoElement = () => {
