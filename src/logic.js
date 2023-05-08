@@ -41,12 +41,15 @@ const onclickProjectBtn = (() => {
 const onclickTodoForm = () => {
   const btnAddTodoForm = document.querySelectorAll(".add-todo-form");
 
-  btnAddTodoForm.forEach(btn => {
+  btnAddTodoForm.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      createTodoForm(e);
-      onclickTodoBtn();
+      // Add query selector:
+      if (!document.querySelector("[data-todo-id]")) {
+        createTodoForm(e);
+        onclickTodoBtn();
+      }
     });
   });
 };

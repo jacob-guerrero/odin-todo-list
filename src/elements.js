@@ -30,6 +30,8 @@ const createTodoForm = (e) => {
 
   const formTodo = document.createElement("form");
   formTodo.classList.add("todo-container");
+  // Generalize following code:
+  divTodo.dataset.todoId = projects[0].length;
   const titleTodo = document.createElement("h2");
   titleTodo.textContent = "Add New Todo";
 
@@ -82,6 +84,8 @@ const createTodoForm = (e) => {
   btnContainer.classList.add("btn-container");
   const btnSubmit = document.createElement("button");
   btnSubmit.classList.add("btn", "add-todo");
+  // Generalize following code:
+  btnSubmit.dataset.todoBtnId = projects[0].length;
   btnSubmit.type = "submit";
   btnSubmit.textContent = "Add Todo";
   const btnClose = document.createElement("button");
