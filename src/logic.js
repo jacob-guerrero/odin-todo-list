@@ -45,7 +45,6 @@ const onclickTodoForm = () => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Add query selector:
       if (!document.querySelector("[data-todo-id]")) {
         createTodoForm(e);
         onclickTodoBtn();
@@ -55,22 +54,24 @@ const onclickTodoForm = () => {
 };
 
 const onclickTodoBtn = () => {
-  const btnAddTodo = document.querySelector(".add-todo");
+  const btnAddTodo = document.querySelectorAll(".add-todo");
 
-  //Fix query selector when +2
-  btnAddTodo.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    const todoElement = createTodoElement();
-    const todo = createTodo(
-      todoElement.todoName,
-      todoElement.todoDesc,
-      todoElement.todoDate,
-      todoElement.todoPrior
-    );
-    projects[0].push(todo);
-    console.log(projects);
-  });
+  btnAddTodo.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+  
+      const todoElement = createTodoElement();
+      const todo = createTodo(
+        todoElement.todoName,
+        todoElement.todoDesc,
+        todoElement.todoDate,
+        todoElement.todoPrior
+      );
+      projects[e.target.dataset.todoBtnId].push(todo);
+      console.log(projects);
+    });
+  })
+  
 };
 
 /* const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
