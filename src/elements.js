@@ -29,11 +29,13 @@ const createTodoForm = (e) => {
   divTodo.dataset.todoId = e.target.dataset.projectBtnId;
   divTodo.setAttribute("id", "myTodo");
 
+  // Create Form:
   const formTodo = document.createElement("form");
   formTodo.classList.add("todo-container");
   const titleTodo = document.createElement("h2");
   titleTodo.textContent = "Add New Todo";
 
+  // Create label/input name:
   const labelName = document.createElement("label");
   labelName.for = "todo";
   labelName.textContent = "Todo Title:";
@@ -43,6 +45,7 @@ const createTodoForm = (e) => {
   inputName.id = "todo";
   inputName.required = "true";
 
+  // Create label/input description:
   const labelDescription = document.createElement("label");
   labelDescription.for = "todo-desc";
   labelDescription.textContent = "Todo Description:";
@@ -52,6 +55,7 @@ const createTodoForm = (e) => {
   inputDescription.id = "todo-desc";
   inputDescription.required = "true";
 
+  // Create label/input date:
   const labelDate = document.createElement("label");
   labelDate.for = "todo-date";
   labelDate.textContent = "Due Date:";
@@ -61,6 +65,7 @@ const createTodoForm = (e) => {
   inputDate.id = "todo-date";
   inputDate.required = "true";
 
+  // Create label/input priority:
   const labelPriority = document.createElement("label");
   labelPriority.for = "todo-prior";
   labelPriority.textContent = "Priority:";
@@ -79,6 +84,7 @@ const createTodoForm = (e) => {
   inputOption3.value = "low";
   inputPriority.append(inputOption1, inputOption2, inputOption3);
 
+  // Create action buttons:
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("btn-todo-container");
   const btnSubmit = document.createElement("button");

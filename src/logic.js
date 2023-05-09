@@ -11,8 +11,8 @@ const createTodo = (title, description, dueDate, priority) => {
   return { title, description, dueDate, priority, sayTask };
 };
 
-const addTask = (project, ...task) => {
-  project.push(...task);
+const addTodo = (index, ...todo) => {
+  projects[index].push(...todo);
 };
 
 const createProject = () => {
@@ -53,6 +53,18 @@ const onclickTodoForm = () => {
   });
 };
 
+const manageTodo = (index) => {
+  const todoElement = createTodoElement(index);
+  const todo = createTodo(
+    todoElement.todoName,
+    todoElement.todoDesc,
+    todoElement.todoDate,
+    todoElement.todoPrior
+  );
+  
+  addTodo(index, todo);
+};
+
 const onclickTodoBtn = () => {
   const btnAddTodo = document.querySelectorAll(".add-todo");
 
@@ -62,36 +74,13 @@ const onclickTodoBtn = () => {
 
       const index = e.target.dataset.todoBtnId;
 
-      const todoElement = createTodoElement(index);
-      const todo = createTodo(
-        todoElement.todoName,
-        todoElement.todoDesc,
-        todoElement.todoDate,
-        todoElement.todoPrior
-      );
-      projects[index].push(todo);
+      manageTodo(index);
       console.log(projects);
     });
   });
 };
 
-/* const firstTask = createTodo("run", "go to the park", "1/1/11", "high");
-const secondTask = createTodo("jump", "go to the city", "1/2/11", "low");
-const thirdTask = createTodo("walk", "go to the mall", "4/1/31", "medium");
-addTask(project, firstTask, secondTask, thirdTask);
-
-console.log(project);
-project[0].sayTask();
-
-const project1 = createProject();
-const firstTask1 = createTodo("dance", "go to the park", "1/1/11", "high");
-const secondTask1 = createTodo("sew", "go to the city", "1/2/11", "low");
-const thirdTask1 = createTodo("sleep", "go to the mall", "4/1/31", "medium");
-addTask(project1, firstTask1, secondTask1, thirdTask1);
-
-console.log(project1); */
-
 // Default:
-//document.querySelector(".add-project").click();
+document.querySelector(".add-project").click();
 
-export { createTodo, addTask, createProject, addProject, projects };
+export { createTodo, addTodo, createProject, addProject, projects };
