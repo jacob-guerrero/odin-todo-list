@@ -59,19 +59,20 @@ const onclickTodoBtn = () => {
   btnAddTodo.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-  
-      const todoElement = createTodoElement();
+
+      const index = e.target.dataset.todoBtnId;
+
+      const todoElement = createTodoElement(index);
       const todo = createTodo(
         todoElement.todoName,
         todoElement.todoDesc,
         todoElement.todoDate,
         todoElement.todoPrior
       );
-      projects[e.target.dataset.todoBtnId].push(todo);
+      projects[index].push(todo);
       console.log(projects);
     });
-  })
-  
+  });
 };
 
 /* const firstTask = createTodo("run", "go to the park", "1/1/11", "high");

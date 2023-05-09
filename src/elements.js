@@ -27,7 +27,6 @@ const createTodoForm = (e) => {
   const divTodo = document.createElement("div");
   divTodo.classList.add("show-todo");
   divTodo.dataset.todoId = e.target.dataset.projectBtnId;
-  //divTodo.dataset.todoId = projects[e.target.dataset.projectBtnId].length;
   divTodo.setAttribute("id", "myTodo");
 
   const formTodo = document.createElement("form");
@@ -81,7 +80,7 @@ const createTodoForm = (e) => {
   inputPriority.append(inputOption1, inputOption2, inputOption3);
 
   const btnContainer = document.createElement("div");
-  btnContainer.classList.add("btn-container");
+  btnContainer.classList.add("btn-todo-container");
   const btnSubmit = document.createElement("button");
   btnSubmit.classList.add("btn", "add-todo");
   btnSubmit.dataset.todoBtnId = e.target.dataset.projectBtnId;
@@ -112,9 +111,7 @@ const createTodoForm = (e) => {
   divProjectContainer.append(divTodo);
 };
 
-const createTodoElement = () => {
-  const btnAddTodoForm = document.querySelector(".add-todo-form");
-
+const createTodoElement = (index) => {
   const todoName = document.querySelector("#todo").value;
   const todoDesc = document.querySelector("#todo-desc").value;
   const todoDate = document.querySelector("#todo-date").value;
@@ -131,9 +128,14 @@ const createTodoElement = () => {
   const priorTodo = document.createElement("p");
   priorTodo.textContent = todoPrior;
 
-  divTodo.append(titleTodo, descriptionTodo, dateTodo, priorTodo);
-  document.querySelector(".project").insertBefore(divTodo, btnAddTodoForm);
+  const divTodoContainer = document.querySelector(
+    `[data-project-id = "${index}"]`
+  );
+  const btnTodo = document.querySelector(`[data-project-btn-id = "${index}"]`);
 
-  return {todoName, todoDesc, todoDate, todoPrior};
+  divTodo.append(titleTodo, descriptionTodo, dateTodo, priorTodo);
+  divTodoContainer.insertBefore(divTodo, btnTodo);
+
+  return { todoName, todoDesc, todoDate, todoPrior };
 };
 export { createProjectElement, createTodoForm, createTodoElement };
