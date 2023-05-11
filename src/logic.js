@@ -23,6 +23,23 @@ const addProject = (project) => {
   projects.push(project);
 };
 
+const deleteProject = (index) => {
+  projects.splice(index, 1);
+  document.querySelector(`[data-project-id = "${index}"] `).remove();
+};
+
+const updateProjectIndex = (index) => {
+  const projectId = document.querySelectorAll("[data-project-id]");
+  const closeBtnId = document.querySelectorAll("[data-close-btn-id]");
+  const projectBtnId = document.querySelectorAll("[data-project-btn-id]");
+
+  for (let j = index; j < projects.length; j++) {
+    projectId[j].dataset.projectId = j;
+    closeBtnId[j].dataset.closeBtnId = j;
+    projectBtnId[j].dataset.projectBtnId = j;
+  }
+};
+
 const projects = [];
 
 const onclickProjectBtn = (() => {
@@ -39,14 +56,10 @@ const onclickProjectBtn = (() => {
 })();
 
 const onclickDeleteProject = (e) => {
-  // Organize this code:
-  // Then add function to manage project index
-  
   const indexDeleteProject = e.target.dataset.closeBtnId;
-  projects.splice(indexDeleteProject, 1);
-  console.log(projects);
 
-  document.querySelector(`[data-project-id = "${indexDeleteProject}"] `).remove();
+  deleteProject(indexDeleteProject);
+  updateProjectIndex(indexDeleteProject);
 };
 
 const onclickTodoForm = () => {
@@ -56,6 +69,7 @@ const onclickTodoForm = () => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
 
+      // Close when opening in another project
       if (!document.querySelector("[data-todo-id]")) {
         createTodoForm(e);
         onclickTodoBtn();
