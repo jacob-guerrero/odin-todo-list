@@ -62,6 +62,15 @@ const onclickDeleteProject = (e) => {
   updateProjectIndex(indexDeleteProject);
 };
 
+const deleteFormIfExist = (e, formContainer) => {
+  const idBtn = e.target.dataset.projectBtnId;
+  const idForm = formContainer.dataset.todoId;
+
+  if (idBtn !== idForm) {
+    formContainer.remove();
+  }
+};
+
 const onclickTodoForm = () => {
   const btnAddTodoForm = document.querySelectorAll(".add-todo-form");
 
@@ -69,7 +78,12 @@ const onclickTodoForm = () => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Close when opening in another project
+      const formContainer = document.querySelector("[data-todo-id]");
+
+      if (formContainer) {
+        deleteFormIfExist(e, formContainer);
+      }
+
       if (!document.querySelector("[data-todo-id]")) {
         createTodoForm(e);
         onclickTodoBtn();
