@@ -38,6 +38,17 @@ const onclickProjectBtn = (() => {
   });
 })();
 
+const onclickDeleteProject = (e) => {
+  // Organize this code:
+  // Then add function to manage project index
+  
+  const indexDeleteProject = e.target.dataset.closeBtnId;
+  projects.splice(indexDeleteProject, 1);
+  console.log(projects);
+
+  document.querySelector(`[data-project-id = "${indexDeleteProject}"] `).remove();
+};
+
 const onclickTodoForm = () => {
   const btnAddTodoForm = document.querySelectorAll(".add-todo-form");
 
@@ -61,7 +72,7 @@ const manageTodo = (index) => {
     todoElement.todoDate,
     todoElement.todoPrior
   );
-  
+
   addTodo(index, todo);
 };
 
@@ -83,4 +94,11 @@ const onclickTodoBtn = () => {
 // Default:
 document.querySelector(".add-project").click();
 
-export { createTodo, addTodo, createProject, addProject, projects };
+export {
+  createTodo,
+  addTodo,
+  createProject,
+  addProject,
+  onclickDeleteProject,
+  projects,
+};

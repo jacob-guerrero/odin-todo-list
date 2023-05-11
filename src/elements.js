@@ -1,4 +1,4 @@
-import { projects } from "./logic";
+import { onclickDeleteProject, projects } from "./logic";
 
 const container = document.querySelector("#content");
 
@@ -12,6 +12,11 @@ const createProjectElement = () => {
   const divProject = document.createElement("div");
   divProject.classList.add("project");
   divProject.dataset.projectId = projects.length;
+  const close = document.createElement("span");
+  close.textContent = "close";
+  close.classList.add("material-symbols-outlined", "close");
+  close.dataset.closeBtnId = projects.length;
+  close.onclick = onclickDeleteProject;
   const titleProject = document.createElement("h2");
   titleProject.textContent = projectName;
   const btnAddTodo = document.createElement("button");
@@ -19,7 +24,7 @@ const createProjectElement = () => {
   btnAddTodo.dataset.projectBtnId = projects.length;
   btnAddTodo.textContent = "+";
 
-  divProject.append(titleProject, btnAddTodo);
+  divProject.append(close, titleProject, btnAddTodo);
   container.append(divProject);
 };
 
