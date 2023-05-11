@@ -23,12 +23,13 @@ const addProject = (project) => {
   projects.push(project);
 };
 
-const deleteProject = (index) => {
+const removeProject = (index) => {
   projects.splice(index, 1);
   document.querySelector(`[data-project-id = "${index}"] `).remove();
 };
 
 const updateProjectIndex = (index) => {
+  // Project:
   const projectId = document.querySelectorAll("[data-project-id]");
   const closeBtnId = document.querySelectorAll("[data-close-btn-id]");
   const projectBtnId = document.querySelectorAll("[data-project-btn-id]");
@@ -38,6 +39,13 @@ const updateProjectIndex = (index) => {
     closeBtnId[j].dataset.closeBtnId = j;
     projectBtnId[j].dataset.projectBtnId = j;
   }
+
+  // Form:
+  const todoId = document.querySelector("[data-todo-id]");
+  const todoBtnId = document.querySelector("[data-todo-btn-id]");
+
+  todoId.dataset.todoId = todoId.parentElement.dataset.projectId;
+  todoBtnId.dataset.todoBtnId = todoId.parentElement.dataset.projectId;
 };
 
 const projects = [];
@@ -58,11 +66,11 @@ const onclickProjectBtn = (() => {
 const onclickDeleteProject = (e) => {
   const indexDeleteProject = e.target.dataset.closeBtnId;
 
-  deleteProject(indexDeleteProject);
+  removeProject(indexDeleteProject);
   updateProjectIndex(indexDeleteProject);
 };
 
-const deleteFormIfExist = (e, formContainer) => {
+const removeFormIfExist = (e, formContainer) => {
   const idBtn = e.target.dataset.projectBtnId;
   const idForm = formContainer.dataset.todoId;
 
@@ -81,7 +89,7 @@ const onclickTodoForm = () => {
       const formContainer = document.querySelector("[data-todo-id]");
 
       if (formContainer) {
-        deleteFormIfExist(e, formContainer);
+        removeFormIfExist(e, formContainer);
       }
 
       if (!document.querySelector("[data-todo-id]")) {
