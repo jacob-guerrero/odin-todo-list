@@ -41,11 +41,22 @@ const updateProjectIndex = (index) => {
   }
 
   // Form:
-  const todoId = document.querySelector("[data-todo-id]");
-  const todoBtnId = document.querySelector("[data-todo-btn-id]");
+  if (document.querySelector("[data-todo-id]")) {
+    const todoId = document.querySelector("[data-todo-id]");
+    const todoBtnId = document.querySelector("[data-todo-btn-id]");
 
-  todoId.dataset.todoId = todoId.parentElement.dataset.projectId;
-  todoBtnId.dataset.todoBtnId = todoId.parentElement.dataset.projectId;
+    todoId.dataset.todoId = todoId.parentElement.dataset.projectId;
+    todoBtnId.dataset.todoBtnId = todoId.parentElement.dataset.projectId;
+  }
+};
+
+const removeTodo = (index, indexParent) => {
+  const parentTodo = document.querySelector(
+    `[data-project-id = "${indexParent}"]`
+  );
+
+  projects[indexParent].splice(index, 1);
+  parentTodo.querySelector(`[data-todo-item-id = "${index}"] `).remove();
 };
 
 const projects = [];
@@ -127,14 +138,14 @@ const onclickTodoBtn = () => {
   });
 };
 
+const onclickDeleteTodo = (e) => {
+  const indexDeleteTodo = e.target.dataset.closeTodoId;
+  const indexParentTodo = e.target.closest(".project").dataset.projectId;
+
+  removeTodo(indexDeleteTodo, indexParentTodo);
+};
+
 // Default:
 document.querySelector(".add-project").click();
 
-export {
-  createTodo,
-  addTodo,
-  createProject,
-  addProject,
-  onclickDeleteProject,
-  projects,
-};
+export { onclickDeleteProject, onclickDeleteTodo, projects };
