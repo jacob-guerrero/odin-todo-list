@@ -59,6 +59,19 @@ const removeTodo = (index, indexParent) => {
   parentTodo.querySelector(`[data-todo-item-id = "${index}"] `).remove();
 };
 
+const updateTodoIndex = (index, indexParent) => {
+  const parentTodo = document.querySelector(
+    `[data-project-id = "${indexParent}"]`
+  );
+  const todoItemId = parentTodo.querySelectorAll("[data-todo-item-id]");
+  const closeTodoId = parentTodo.querySelectorAll("[data-close-todo-id]");
+
+  for (let j = index; j < projects[indexParent].length; j++) {
+    todoItemId[j].dataset.todoItemId = j;
+    closeTodoId[j].dataset.closeTodoId = j;
+  }
+};
+
 const projects = [];
 
 const onclickProjectBtn = (() => {
@@ -143,6 +156,7 @@ const onclickDeleteTodo = (e) => {
   const indexParentTodo = e.target.closest(".project").dataset.projectId;
 
   removeTodo(indexDeleteTodo, indexParentTodo);
+  updateTodoIndex(indexDeleteTodo, indexParentTodo);
 };
 
 // Default:
