@@ -1,4 +1,4 @@
-import { onclickDeleteProject, oncl, projects } from "./logic";
+import { onclickDeleteProject, onclickDeleteTodo, projects } from "./logic";
 
 const container = document.querySelector("#content");
 
@@ -145,12 +145,17 @@ const createTodoElement = (index) => {
   const priorTodo = document.createElement("p");
   priorTodo.textContent = todoPrior;
 
+  const expandBtn = document.createElement("span");
+  expandBtn.textContent = "keyboard_double_arrow_down";
+  expandBtn.classList.add("material-symbols-outlined-2", "expand");
+  expandBtn.dataset.expandBtn = projects[index].length;
+  expandBtn.onclick = "";
   const divTodoContainer = document.querySelector(
     `[data-project-id = "${index}"]`
   );
   const btnTodo = document.querySelector(`[data-project-btn-id = "${index}"]`);
 
-  divTodo.append(closeTodo, titleTodo, descriptionTodo, dateTodo, priorTodo);
+  divTodo.append(closeTodo, titleTodo, descriptionTodo, dateTodo, priorTodo, expandBtn);
   divTodoContainer.insertBefore(divTodo, btnTodo);
 
   return { todoName, todoDesc, todoDate, todoPrior };
