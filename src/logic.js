@@ -159,7 +159,18 @@ const onclickDeleteTodo = (e) => {
   updateTodoIndex(indexDeleteTodo, indexParentTodo);
 };
 
+const expandTodo = (e) => {
+  if(e.target.textContent === "keyboard_double_arrow_down") {
+    e.target.textContent = "keyboard_double_arrow_up";
+  } else {
+    e.target.textContent = "keyboard_double_arrow_down";
+  }
+  const hiddenElements = e.target.parentElement.querySelectorAll(".hide-content");
+  hiddenElements.forEach(elem => {
+    elem.classList.toggle("active");
+  });
+}
 // Default:
 document.querySelector(".add-project").click();
 
-export { onclickDeleteProject, onclickDeleteTodo, projects };
+export { onclickDeleteProject, onclickDeleteTodo, expandTodo, projects };
