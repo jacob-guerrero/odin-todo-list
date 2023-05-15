@@ -1,4 +1,4 @@
-import { onclickDeleteProject, onclickDeleteTodo, expandTodo, projects } from "./logic";
+import { onclickTodoForm, onclickDeleteProject, onclickDeleteTodo, expandTodo, projects, toggleActiveClass } from "./logic";
 
 const container = document.querySelector("#content");
 
@@ -9,20 +9,26 @@ const createProjectElement = () => {
     projectName = "Project";
   }
 
+  // Create Project
   const divProject = document.createElement("div");
   divProject.classList.add("project");
   divProject.dataset.projectId = projects.length;
+
+  // Close Icon:
   const close = document.createElement("span");
   close.textContent = "close";
   close.classList.add("material-symbols-outlined", "close");
   close.dataset.closeBtnId = projects.length;
   close.onclick = onclickDeleteProject;
+
+  // Project Elements:
   const titleProject = document.createElement("h2");
   titleProject.textContent = projectName;
   const btnAddTodo = document.createElement("button");
   btnAddTodo.classList.add("add-todo-form");
   btnAddTodo.dataset.projectBtnId = projects.length;
   btnAddTodo.textContent = "+";
+  btnAddTodo.onclick = onclickTodoForm;
 
   divProject.append(close, titleProject, btnAddTodo);
   container.append(divProject);
@@ -101,6 +107,7 @@ const createTodoForm = (e) => {
   btnClose.classList.add("btn", "hide-todo");
   btnClose.type = "button";
   btnClose.textContent = "Close";
+  btnClose.onclick = toggleActiveClass;
   btnContainer.append(btnSubmit, btnClose);
 
   formTodo.append(
@@ -123,19 +130,25 @@ const createTodoForm = (e) => {
 };
 
 const createTodoElement = (index) => {
+  // Assign Values to the Element:
   const todoName = document.querySelector("#todo").value;
   const todoDesc = document.querySelector("#todo-desc").value;
   const todoDate = document.querySelector("#todo-date").value;
   const todoPrior = document.querySelector("#todo-prior").value;
 
+  // Create Todo:
   const divTodo = document.createElement("div");
   divTodo.classList.add("todo");
   divTodo.dataset.todoItemId = projects[index].length;
+
+  // Close Icon:
   const closeTodo = document.createElement("span");
   closeTodo.textContent = "close";
   closeTodo.classList.add("material-symbols-outlined", "close-todo");
   closeTodo.dataset.closeTodoId = projects[index].length;
   closeTodo.onclick = onclickDeleteTodo;
+
+  // Create Todo Elements:
   const titleTodo = document.createElement("h3");
   titleTodo.textContent = todoName;
   titleTodo.classList.add("todo-title");
@@ -154,6 +167,8 @@ const createTodoElement = (index) => {
   expandBtn.classList.add("material-symbols-outlined-2", "expand");
   expandBtn.dataset.expandBtn = projects[index].length;
   expandBtn.onclick = expandTodo;
+
+  // Select Todo Container:
   const divTodoContainer = document.querySelector(
     `[data-project-id = "${index}"]`
   );

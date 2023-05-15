@@ -84,16 +84,19 @@ h1, h2, h3, p {
   /* animation-play-state: paused; */
   transform: scale(1) translateY(0.1rem);
 }
+.material-symbols-outlined-2.up:hover {
+  transform: scale(1) translateY(-0.1rem);
+}
 
 /* Style */
 
-.hide-content {
+.hide-content, .show-todo.active {
   max-height: 0;
   overflow: hidden;
   /* Fix transition delay: */
   transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
-.hide-content.active {
+.hide-content.active, .show-todo {
   max-height: 1000px;
   transition: max-height 1s ease-in;
 }
@@ -101,7 +104,6 @@ h1, h2, h3, p {
 .project, .todo {
   position: relative;
 }
-
 .todo {
   border: 1px solid black;
 }

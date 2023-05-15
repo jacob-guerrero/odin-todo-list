@@ -81,7 +81,6 @@ const onclickProjectBtn = (() => {
     e.preventDefault();
 
     createProjectElement();
-    onclickTodoForm();
     addProject(createProject());
     console.log(projects);
   });
@@ -94,34 +93,28 @@ const onclickDeleteProject = (e) => {
   updateProjectIndex(indexDeleteProject);
 };
 
-const removeFormIfExist = (e, formContainer) => {
-  const idBtn = e.target.dataset.projectBtnId;
-  const idForm = formContainer.dataset.todoId;
-
-  if (idBtn !== idForm) {
+const removeFormIfExist = (formContainer) => {
     formContainer.remove();
-  }
 };
 
-const onclickTodoForm = () => {
-  const btnAddTodoForm = document.querySelectorAll(".add-todo-form");
+const onclickTodoForm = (e) => {
+  const formContainer = document.querySelector("[data-todo-id]");
 
-  btnAddTodoForm.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
+  if (formContainer) {
+    const idBtn = e.target.dataset.projectBtnId;
+    const idForm = formContainer.dataset.todoId;
 
-      const formContainer = document.querySelector("[data-todo-id]");
+    if (idBtn === idForm) {
+      toggleActiveClass();
+    } else {
+      removeFormIfExist(formContainer);
+    }
+  }
 
-      if (formContainer) {
-        removeFormIfExist(e, formContainer);
-      }
-
-      if (!document.querySelector("[data-todo-id]")) {
-        createTodoForm(e);
-        onclickTodoBtn();
-      }
-    });
-  });
+  if (!document.querySelector("[data-todo-id]")) {
+    createTodoForm(e);
+    onclickTodoBtn();
+  }
 };
 
 const manageTodo = (index) => {
@@ -160,17 +153,34 @@ const onclickDeleteTodo = (e) => {
 };
 
 const expandTodo = (e) => {
-  if(e.target.textContent === "keyboard_double_arrow_down") {
+  if (e.target.textContent === "keyboard_double_arrow_down") {
     e.target.textContent = "keyboard_double_arrow_up";
+    e.target.classList.add("up");
   } else {
     e.target.textContent = "keyboard_double_arrow_down";
+    e.target.classList.remove("up");
   }
-  const hiddenElements = e.target.parentElement.querySelectorAll(".hide-content");
-  hiddenElements.forEach(elem => {
+  const hiddenElements =
+    e.target.parentElement.querySelectorAll(".hide-content");
+  hiddenElements.forEach((elem) => {
     elem.classList.toggle("active");
   });
+};
+
+const toggleActiveClass = () => {
+  const formContainer = document.querySelector("[data-todo-id]");
+
+  formContainer.classList.toggle("active");
 }
+
 // Default:
 document.querySelector(".add-project").click();
 
-export { onclickDeleteProject, onclickDeleteTodo, expandTodo, projects };
+export {
+  onclickTodoForm,
+  onclickDeleteProject,
+  onclickDeleteTodo,
+  expandTodo,
+  toggleActiveClass,
+  projects,
+};
