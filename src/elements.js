@@ -162,11 +162,24 @@ const createTodoElement = (index) => {
   priorTodo.textContent = todoPrior;
   priorTodo.classList.add("todo-priority", "hide-content");
 
+  // Edit Icon:
+  const editContainer = document.createElement("div");
+  editContainer.classList.add("edit-container", "hide-content")
+  const editTodo = document.createElement("span");
+  editTodo.textContent = "edit_square";
+  editTodo.classList.add("material-symbols-outlined-3", "edit-todo");
+  editTodo.dataset.editTodoId = projects[index].length;
+  editTodo.onclick = "";
+  editContainer.append(editTodo)
+
+  //Expand Icon:
+  const expandContainer = document.createElement("div");
+  expandContainer.classList.add("expand-container")
   const expandBtn = document.createElement("span");
   expandBtn.textContent = "keyboard_double_arrow_down";
   expandBtn.classList.add("material-symbols-outlined-2", "expand");
-  expandBtn.dataset.expandBtn = projects[index].length;
   expandBtn.onclick = expandTodo;
+  expandContainer.append(expandBtn);
 
   // Select Todo Container:
   const divTodoContainer = document.querySelector(
@@ -174,7 +187,7 @@ const createTodoElement = (index) => {
   );
   const btnTodo = document.querySelector(`[data-project-btn-id = "${index}"]`);
 
-  divTodo.append(closeTodo, titleTodo, dateTodo, descriptionTodo, priorTodo, expandBtn);
+  divTodo.append(closeTodo, titleTodo, dateTodo, descriptionTodo, priorTodo, editContainer, expandContainer);
   divTodoContainer.insertBefore(divTodo, btnTodo);
 
   return { todoName, todoDesc, todoDate, todoPrior };

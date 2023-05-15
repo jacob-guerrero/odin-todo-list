@@ -93,6 +93,12 @@ const onclickDeleteProject = (e) => {
   updateProjectIndex(indexDeleteProject);
 };
 
+const toggleActiveClass = () => {
+  const formContainer = document.querySelector("[data-todo-id]");
+
+  formContainer.classList.toggle("active");
+}
+
 const removeFormIfExist = (formContainer) => {
     formContainer.remove();
 };
@@ -161,17 +167,11 @@ const expandTodo = (e) => {
     e.target.classList.remove("up");
   }
   const hiddenElements =
-    e.target.parentElement.querySelectorAll(".hide-content");
+    e.target.closest(".todo").querySelectorAll(".hide-content");
   hiddenElements.forEach((elem) => {
     elem.classList.toggle("active");
   });
 };
-
-const toggleActiveClass = () => {
-  const formContainer = document.querySelector("[data-todo-id]");
-
-  formContainer.classList.toggle("active");
-}
 
 // Default:
 document.querySelector(".add-project").click();
