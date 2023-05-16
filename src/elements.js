@@ -139,10 +139,10 @@ const createTodoForm = (e) => {
 
 const createTodoElement = (index) => {
   // Assign Values to the Element:
-  let todoName = document.querySelector("#todo").value;
-  let todoDesc = document.querySelector("#todo-desc").value;
-  let todoDate = document.querySelector("#todo-date").value;
-  let todoPrior = document.querySelector("#todo-prior").value;
+  const todoName = document.querySelector("#todo").value;
+  const todoDesc = document.querySelector("#todo-desc").value;
+  const todoDate = document.querySelector("#todo-date").value;
+  const todoPrior = document.querySelector("#todo-prior").value;
 
   // Create Todo:
   const divTodo = document.createElement("div");
@@ -208,4 +208,5 @@ const createTodoElement = (index) => {
 
   return { todoName, todoDesc, todoDate, todoPrior };
 };
+
 export { createProjectElement, createTodoForm, createTodoElement };

@@ -230,7 +230,7 @@ const onclickEditTodo = (e) => {
   saveTodoBtn.textContent = "check_circle";
   saveTodoBtn.classList.add("material-symbols-outlined-4", "save-todo");
   saveTodoBtn.dataset.saveTodoId = todoContainer.dataset.todoItemId;
-  saveTodoBtn.onclick = "";
+  saveTodoBtn.onclick = saveTodoEdit;
   const cancelTodoBtn = document.createElement("span");
   cancelTodoBtn.textContent = "cancel";
   cancelTodoBtn.classList.add("material-symbols-outlined-5", "cancel-todo");
@@ -238,6 +238,42 @@ const onclickEditTodo = (e) => {
   todoContainer.querySelector(".option-container").append(saveTodoBtn, cancelTodoBtn);
   todoContainer.querySelector(".option-container").removeChild(edit);
 };
+
+const saveTodoEdit = (e) => {
+  /* const index = e.target.closest(".todo").dataset.todoItemId; */
+  const index = e.target.closest(".project").dataset.projectId;
+  const optionContainer = e.target.parentElement;
+  const projectContainer = e.target.closest(".project");
+  const todoContainer = e.target.closest(".todo");
+  const inputs = todoContainer.querySelectorAll("input");
+
+  const todoName = document.querySelector(".input-title").value;
+  const todoDesc = document.querySelector(".input-description").value;
+  const todoDate = document.querySelector(".input-date").value;
+  const todoPrior = document.querySelector(".input-priority").value;
+
+  // Update Todo Elements:
+  const titleTodo = document.createElement("h3");
+  titleTodo.textContent = todoName;
+  titleTodo.classList.add("todo-title");
+  const descriptionTodo = document.createElement("p");
+  descriptionTodo.textContent = todoDesc;
+  descriptionTodo.classList.add("todo-description", "hide-content", "active");
+  const dateTodo = document.createElement("p");
+  dateTodo.textContent = todoDate;
+  dateTodo.classList.add("todo-date");
+  const priorTodo = document.createElement("p");
+  priorTodo.textContent = todoPrior;
+  priorTodo.classList.add("todo-priority", "hide-content", "active");
+
+  optionContainer.before(titleTodo, dateTodo, descriptionTodo, priorTodo);
+  
+  inputs.forEach(input => {
+    input.remove();
+  });
+  todoContainer.querySelector("select").remove();
+
+}
 
 /* Capitalize First Letter */
 function capitalizeFirstLetter(string) {
