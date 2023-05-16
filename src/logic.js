@@ -97,10 +97,10 @@ const toggleActiveClass = () => {
   const formContainer = document.querySelector("[data-todo-id]");
 
   formContainer.classList.toggle("active");
-}
+};
 
 const removeFormIfExist = (formContainer) => {
-    formContainer.remove();
+  formContainer.remove();
 };
 
 const onclickTodoForm = (e) => {
@@ -166,12 +166,65 @@ const expandTodo = (e) => {
     e.target.textContent = "keyboard_double_arrow_down";
     e.target.classList.remove("up");
   }
-  const hiddenElements =
-    e.target.closest(".todo").querySelectorAll(".hide-content");
+  const hiddenElements = e.target
+    .closest(".todo")
+    .querySelectorAll(".hide-content");
   hiddenElements.forEach((elem) => {
     elem.classList.toggle("active");
   });
 };
+
+const onclickEditTodo = (e) => {
+  const todoContainer = e.target.closest('.todo');
+  
+  // Edit Input Title:
+  const title = todoContainer.querySelector(".todo-title");
+  const titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.value = title.textContent;
+  titleInput.placeholder = "Title";
+  todoContainer.insertBefore(titleInput, title);
+  todoContainer.removeChild(title);
+
+  // Edit Input Description:
+  const description = todoContainer.querySelector(".todo-description");
+  const descriptionInput = document.createElement("input");
+  descriptionInput.type = "text";
+  descriptionInput.value = description.textContent;
+  descriptionInput.placeholder = "Description";
+  todoContainer.insertBefore(descriptionInput, description);
+  todoContainer.removeChild(description);
+
+  // Edit Input Date:
+  const date = todoContainer.querySelector(".todo-date");
+  const dateInput = document.createElement("input");
+  dateInput.type = "date";
+  dateInput.value = date.textContent;
+  todoContainer.insertBefore(dateInput, date);
+  todoContainer.removeChild(date);
+
+  // Edit Input Priority:
+  const priority = todoContainer.querySelector(".todo-priority");
+  const priorityInput = document.createElement("select");
+  const inputOption1 = document.createElement("option");
+  inputOption1.textContent = "High";
+  inputOption1.value = "high";
+  const inputOption2 = document.createElement("option");
+  inputOption2.textContent = "Medium";
+  inputOption2.value = "medium";
+  const inputOption3 = document.createElement("option");
+  inputOption3.textContent = "Low";
+  inputOption3.value = "low";
+  priorityInput.append(inputOption1, inputOption2, inputOption3);
+  priorityInput.value = priority.textContent;
+  todoContainer.insertBefore(priorityInput, priority);
+  todoContainer.removeChild(priority);
+};
+
+/* Capitalize First Letter */
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 // Default:
 document.querySelector(".add-project").click();
@@ -181,6 +234,7 @@ export {
   onclickDeleteProject,
   onclickDeleteTodo,
   expandTodo,
+  onclickEditTodo,
   toggleActiveClass,
   projects,
 };

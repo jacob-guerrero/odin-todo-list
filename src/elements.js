@@ -1,4 +1,12 @@
-import { onclickTodoForm, onclickDeleteProject, onclickDeleteTodo, expandTodo, projects, toggleActiveClass } from "./logic";
+import {
+  onclickTodoForm,
+  onclickDeleteProject,
+  onclickDeleteTodo,
+  expandTodo,
+  onclickEditTodo,
+  projects,
+  toggleActiveClass,
+} from "./logic";
 
 const container = document.querySelector("#content");
 
@@ -164,17 +172,17 @@ const createTodoElement = (index) => {
 
   // Edit Icon:
   const editContainer = document.createElement("div");
-  editContainer.classList.add("edit-container", "hide-content")
+  editContainer.classList.add("option-container", "hide-content");
   const editTodo = document.createElement("span");
   editTodo.textContent = "edit_square";
   editTodo.classList.add("material-symbols-outlined-3", "edit-todo");
   editTodo.dataset.editTodoId = projects[index].length;
-  editTodo.onclick = "";
-  editContainer.append(editTodo)
+  editTodo.onclick = onclickEditTodo;
+  editContainer.append(editTodo);
 
   //Expand Icon:
   const expandContainer = document.createElement("div");
-  expandContainer.classList.add("expand-container")
+  expandContainer.classList.add("expand-container");
   const expandBtn = document.createElement("span");
   expandBtn.textContent = "keyboard_double_arrow_down";
   expandBtn.classList.add("material-symbols-outlined-2", "expand");
@@ -187,7 +195,15 @@ const createTodoElement = (index) => {
   );
   const btnTodo = document.querySelector(`[data-project-btn-id = "${index}"]`);
 
-  divTodo.append(closeTodo, titleTodo, dateTodo, descriptionTodo, priorTodo, editContainer, expandContainer);
+  divTodo.append(
+    closeTodo,
+    titleTodo,
+    dateTodo,
+    descriptionTodo,
+    priorTodo,
+    editContainer,
+    expandContainer
+  );
   divTodoContainer.insertBefore(divTodo, btnTodo);
 
   return { todoName, todoDesc, todoDate, todoPrior };
