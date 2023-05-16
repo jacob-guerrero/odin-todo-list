@@ -183,6 +183,7 @@ const onclickEditTodo = (e) => {
   titleInput.type = "text";
   titleInput.value = title.textContent;
   titleInput.placeholder = "Title";
+  titleInput.classList.add("input-title");
   todoContainer.insertBefore(titleInput, title);
   todoContainer.removeChild(title);
 
@@ -192,6 +193,7 @@ const onclickEditTodo = (e) => {
   descriptionInput.type = "text";
   descriptionInput.value = description.textContent;
   descriptionInput.placeholder = "Description";
+  descriptionInput.classList.add("input-description");
   todoContainer.insertBefore(descriptionInput, description);
   todoContainer.removeChild(description);
 
@@ -200,6 +202,7 @@ const onclickEditTodo = (e) => {
   const dateInput = document.createElement("input");
   dateInput.type = "date";
   dateInput.value = date.textContent;
+  dateInput.classList.add("input-date");
   todoContainer.insertBefore(dateInput, date);
   todoContainer.removeChild(date);
 
@@ -217,19 +220,22 @@ const onclickEditTodo = (e) => {
   inputOption3.value = "low";
   priorityInput.append(inputOption1, inputOption2, inputOption3);
   priorityInput.value = priority.textContent;
+  priorityInput.classList.add("input-priority");
   todoContainer.insertBefore(priorityInput, priority);
   todoContainer.removeChild(priority);
 
   // Options:
   const edit = todoContainer.querySelector(".edit-todo");
-  const saveTodo = document.createElement("span");
-  saveTodo.textContent = "check_circle";
-  saveTodo.classList.add("material-symbols-outlined-4", "save-todo");
-  const cancelTodo = document.createElement("span");
-  cancelTodo.textContent = "cancel";
-  cancelTodo.classList.add("material-symbols-outlined-5", "cancel-todo");
+  const saveTodoBtn = document.createElement("span");
+  saveTodoBtn.textContent = "check_circle";
+  saveTodoBtn.classList.add("material-symbols-outlined-4", "save-todo");
+  saveTodoBtn.dataset.saveTodoId = todoContainer.dataset.todoItemId;
+  saveTodoBtn.onclick = "";
+  const cancelTodoBtn = document.createElement("span");
+  cancelTodoBtn.textContent = "cancel";
+  cancelTodoBtn.classList.add("material-symbols-outlined-5", "cancel-todo");
 
-  todoContainer.querySelector(".option-container").append(saveTodo, cancelTodo);
+  todoContainer.querySelector(".option-container").append(saveTodoBtn, cancelTodoBtn);
   todoContainer.querySelector(".option-container").removeChild(edit);
 };
 
