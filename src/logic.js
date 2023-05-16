@@ -219,6 +219,18 @@ const onclickEditTodo = (e) => {
   priorityInput.value = priority.textContent;
   todoContainer.insertBefore(priorityInput, priority);
   todoContainer.removeChild(priority);
+
+  // Options:
+  const edit = todoContainer.querySelector(".edit-todo");
+  const saveTodo = document.createElement("span");
+  saveTodo.textContent = "check_circle";
+  saveTodo.classList.add("material-symbols-outlined-4", "save-todo");
+  const cancelTodo = document.createElement("span");
+  cancelTodo.textContent = "cancel";
+  cancelTodo.classList.add("material-symbols-outlined-5", "cancel-todo");
+
+  todoContainer.querySelector(".option-container").append(saveTodo, cancelTodo);
+  todoContainer.querySelector(".option-container").removeChild(edit);
 };
 
 /* Capitalize First Letter */
