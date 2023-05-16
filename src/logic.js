@@ -273,6 +273,18 @@ const saveTodoEdit = (e) => {
   });
   todoContainer.querySelector("select").remove();
 
+  // Options:
+  const saveTodoBtn = todoContainer.querySelector(".save-todo");
+  const cancelTodoBtn = todoContainer.querySelector(".cancel-todo");
+  const editTodo = document.createElement("span");
+  editTodo.textContent = "edit_square";
+  editTodo.classList.add("material-symbols-outlined-3", "edit-todo");
+  saveTodoBtn.dataset.saveTodoId = todoContainer.dataset.todoItemId;
+  editTodo.onclick = onclickEditTodo;
+
+  todoContainer.querySelector(".option-container").append(editTodo);
+  todoContainer.querySelector(".option-container").removeChild(saveTodoBtn);
+  todoContainer.querySelector(".option-container").removeChild(cancelTodoBtn);
 }
 
 /* Capitalize First Letter */
