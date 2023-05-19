@@ -32,6 +32,7 @@ const createProjectElement = () => {
   // Project Elements:
   const titleProject = document.createElement("h2");
   titleProject.textContent = projectName;
+  titleProject.classList.add("project-title")
   const btnAddTodo = document.createElement("button");
   btnAddTodo.classList.add("add-todo-form");
   btnAddTodo.dataset.projectBtnId = projects.length;
@@ -283,8 +284,7 @@ const modifyTodoElement = (e) => {
       todoPrior
     );
   }
-  console.log("yes")
-}
+};
 
 const updateTodoArray = (
   projectIndex,
@@ -298,7 +298,11 @@ const updateTodoArray = (
   projects[projectIndex][todoIndex]["description"] = description;
   projects[projectIndex][todoIndex]["dueDate"] = dueDate;
   projects[projectIndex][todoIndex]["priority"] = priority;
-  console.log(projects);
 };
 
-export { createProjectElement, createTodoForm, createTodoElement, modifyTodoElement };
+export {
+  createProjectElement,
+  createTodoForm,
+  createTodoElement,
+  modifyTodoElement,
+};

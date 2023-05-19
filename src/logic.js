@@ -2,7 +2,7 @@ import {
   createProjectElement,
   createTodoForm,
   createTodoElement,
-  modifyTodoElement
+  modifyTodoElement,
 } from "./elements";
 
 const createTodo = (title, description, dueDate, priority) => {
@@ -76,7 +76,14 @@ const updateTodoIndex = (index, indexParent) => {
 const projects = [];
 
 const onclickProjectBtn = (() => {
+  const btnNewProject = document.querySelector(".new-project");
   const btnAddProject = document.querySelector(".add-project");
+  const btnCloseProject = document.querySelector(".hide-options");
+
+  btnNewProject.addEventListener("click", () => {
+    const btnNewForm = document.querySelector(".show-form");
+    btnNewForm.classList.toggle("active");
+  })
 
   btnAddProject.addEventListener("click", (e) => {
     e.preventDefault();
@@ -85,6 +92,11 @@ const onclickProjectBtn = (() => {
     addProject(createProject());
     console.log(projects);
   });
+
+  btnCloseProject.addEventListener("click", () => {
+    const btnNewForm = document.querySelector(".show-form");
+    btnNewForm.classList.toggle("active");
+  })
 })();
 
 const onclickDeleteProject = (e) => {

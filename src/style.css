@@ -9,11 +9,11 @@ html {
   box-sizing: inherit;
 }
 :root {
-  --main-color: #1d3557;
-  --second-color: #a8dadc;
-  --third-color: #457b9d;
-  --side-color: #f1faee;
-  --contrast-color: #e63946;
+  --main-color: #3a0ca3;
+  --second-color: #7209b7;
+  --third-color: #4361ee;
+  --side-color: #4cc9f0;
+  --contrast-color: #f72585;
   --gray: #f5f5f5;
   --gray-second: #d6d6d6;
   --gray-darker: #a0a0a0;
@@ -122,14 +122,29 @@ h1, h2, h3, p {
 }
 
 /* Style */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  padding: 2rem 0.5rem;
+}
+.new-project {
+  width: max-content;
+  padding: 0.5rem 1rem;
+}
 
-.hide-content, .show-todo.active {
+.hide-content, .show-todo.active, .show-form {
   max-height: 0;
   overflow: hidden;
   /* Fix transition delay: */
   transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 }
-.hide-content.active, .show-todo {
+.hide-content.active, .show-todo, .show-form.active {
   max-height: 1000px;
   transition: max-height 1s ease-in;
 }
