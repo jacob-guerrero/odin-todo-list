@@ -2,6 +2,7 @@ import {
   createProjectElement,
   createTodoForm,
   createTodoElement,
+  modifyTodoElement
 } from "./elements";
 
 const createTodo = (title, description, dueDate, priority) => {
@@ -230,90 +231,16 @@ const onclickEditTodo = (e) => {
   saveTodoBtn.textContent = "check_circle";
   saveTodoBtn.classList.add("material-symbols-outlined-4", "save-todo");
   saveTodoBtn.dataset.saveTodoId = todoContainer.dataset.todoItemId;
-  saveTodoBtn.onclick = saveTodoEdit;
+  saveTodoBtn.onclick = modifyTodoElement;
   const cancelTodoBtn = document.createElement("span");
   cancelTodoBtn.textContent = "cancel";
   cancelTodoBtn.classList.add("material-symbols-outlined-5", "cancel-todo");
+  cancelTodoBtn.onclick = modifyTodoElement;
 
   todoContainer
     .querySelector(".option-container")
     .append(saveTodoBtn, cancelTodoBtn);
   todoContainer.querySelector(".option-container").removeChild(edit);
-};
-
-const saveTodoEdit = (e) => {
-  const projectIndex = e.target.closest(".project").dataset.projectId;
-  const todoIndex = e.target.closest(".todo").dataset.todoItemId;
-  const targetTodo = document.querySelector(
-    `[data-todo-item-id = "${e.target.dataset.saveTodoId}"]`
-  );
-  const todoContainer = e.target.closest(".todo");
-  const inputs = todoContainer.querySelectorAll("input");
-  const optionContainer = e.target.parentElement;
-
-  // Assign Values to the Element:
-  const todoName = targetTodo.querySelector(".input-title").value;
-  const todoDesc = targetTodo.querySelector(".input-description").value;
-  const todoDate = targetTodo.querySelector(".input-date").value;
-  const todoPrior = targetTodo.querySelector(".input-priority").value;
-
-  // Update Todo Elements:
-  const titleTodo = document.createElement("h3");
-  titleTodo.textContent = todoName;
-  titleTodo.classList.add("todo-title");
-  const descriptionTodo = document.createElement("p");
-  descriptionTodo.textContent = todoDesc;
-  descriptionTodo.classList.add("todo-description", "hide-content", "active");
-  const dateTodo = document.createElement("p");
-  dateTodo.textContent = todoDate;
-  dateTodo.classList.add("todo-date");
-  const priorTodo = document.createElement("p");
-  priorTodo.textContent = todoPrior;
-  priorTodo.classList.add("todo-priority", "hide-content", "active");
-
-  optionContainer.before(titleTodo, dateTodo, descriptionTodo, priorTodo);
-
-  inputs.forEach((input) => {
-    input.remove();
-  });
-  todoContainer.querySelector("select").remove();
-
-  // Update Options:
-  const saveTodoBtn = todoContainer.querySelector(".save-todo");
-  const cancelTodoBtn = todoContainer.querySelector(".cancel-todo");
-  const editTodo = document.createElement("span");
-  editTodo.textContent = "edit_square";
-  editTodo.classList.add("material-symbols-outlined-3", "edit-todo");
-  saveTodoBtn.dataset.saveTodoId = todoContainer.dataset.todoItemId;
-  editTodo.onclick = onclickEditTodo;
-
-  todoContainer.querySelector(".option-container").append(editTodo);
-  todoContainer.querySelector(".option-container").removeChild(saveTodoBtn);
-  todoContainer.querySelector(".option-container").removeChild(cancelTodoBtn);
-
-  updateTodoArray(
-    projectIndex,
-    todoIndex,
-    todoName,
-    todoDesc,
-    todoDate,
-    todoPrior
-  );
-};
-
-const updateTodoArray = (
-  projectIndex,
-  todoIndex,
-  title,
-  description,
-  dueDate,
-  priority
-) => {
-  projects[projectIndex][todoIndex]["title"] = title;
-  projects[projectIndex][todoIndex]["description"] = description;
-  projects[projectIndex][todoIndex]["dueDate"] = dueDate;
-  projects[projectIndex][todoIndex]["priority"] = priority;
-  console.log(projects);
 };
 
 /* Capitalize First Letter */
