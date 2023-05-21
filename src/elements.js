@@ -51,7 +51,7 @@ const createTodoForm = (e) => {
 
   // Create Form:
   const formTodo = document.createElement("form");
-  formTodo.classList.add("todo-container");
+  formTodo.classList.add("todo-form-container");
   const titleTodo = document.createElement("h2");
   titleTodo.textContent = "Add New Todo";
 
