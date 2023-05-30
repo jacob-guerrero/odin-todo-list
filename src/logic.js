@@ -106,10 +106,11 @@ const onclickDeleteProject = (e) => {
   updateProjectIndex(indexDeleteProject);
 };
 
-const toggleActiveClass = () => {
+const toggleActiveClass = (e) => {
   const formContainer = document.querySelector("[data-todo-id]");
 
   formContainer.classList.toggle("active");
+  e.target.classList.toggle("active");
 };
 
 const removeFormIfExist = (formContainer) => {
@@ -118,21 +119,24 @@ const removeFormIfExist = (formContainer) => {
 
 const onclickTodoForm = (e) => {
   const formContainer = document.querySelector("[data-todo-id]");
+  const activeTodoFormBtn = document.querySelector(".add-todo-form.active")
 
   if (formContainer) {
     const idBtn = e.target.dataset.projectBtnId;
     const idForm = formContainer.dataset.todoId;
 
     if (idBtn === idForm) {
-      toggleActiveClass();
+      toggleActiveClass(e);
     } else {
       removeFormIfExist(formContainer);
+      activeTodoFormBtn.classList.remove("active");
     }
   }
 
   if (!document.querySelector("[data-todo-id]")) {
     createTodoForm(e);
     onclickTodoBtn();
+    e.target.classList.add("active");
   }
 };
 
