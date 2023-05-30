@@ -53,6 +53,7 @@ const createTodoForm = (e) => {
   const formTodo = document.createElement("form");
   formTodo.classList.add("todo-form-container");
   const titleTodo = document.createElement("h2");
+  titleTodo.classList.add("todo-form-title");
   titleTodo.textContent = "Add New Todo";
 
   // Create label/input name:
