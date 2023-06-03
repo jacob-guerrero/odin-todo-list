@@ -4,8 +4,11 @@ import {
   onclickDeleteTodo,
   expandTodo,
   onclickEditTodo,
-  projects,
   toggleActiveClass,
+  saveData,
+  items,
+  store,
+  projects,
 } from "./logic";
 
 const container = document.querySelector("#content");
@@ -16,6 +19,9 @@ const createProjectElement = () => {
   if (projectName === "") {
     projectName = "Project";
   }
+  
+  //saveData(projectName);
+  store(projectName);
 
   // Create Project
   const divProject = document.createElement("div");

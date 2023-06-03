@@ -259,6 +259,16 @@ const onclickEditTodo = (e) => {
   todoContainer.querySelector(".option-container").removeChild(edit);
 };
 
+let items = [];
+function store(projectName) {
+    items.push(projectName);
+    localStorage.setItem("item", JSON.stringify(items));
+}
+
+const saveData = (projectName) => {
+  localStorage.setItem("projectName", projectName)
+}
+
 /* Capitalize First Letter */
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -274,5 +284,8 @@ export {
   expandTodo,
   onclickEditTodo,
   toggleActiveClass,
+  saveData,
+  items,
+  store,
   projects,
 };
