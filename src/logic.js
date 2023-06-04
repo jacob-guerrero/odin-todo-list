@@ -83,7 +83,7 @@ const onclickProjectBtn = (() => {
   btnNewProject.addEventListener("click", () => {
     const btnNewForm = document.querySelector(".show-form");
     btnNewForm.classList.toggle("active");
-  })
+  });
 
   btnAddProject.addEventListener("click", (e) => {
     e.preventDefault();
@@ -96,7 +96,7 @@ const onclickProjectBtn = (() => {
   btnCloseProject.addEventListener("click", () => {
     const btnNewForm = document.querySelector(".show-form");
     btnNewForm.classList.toggle("active");
-  })
+  });
 })();
 
 const onclickDeleteProject = (e) => {
@@ -119,7 +119,7 @@ const removeFormIfExist = (formContainer) => {
 
 const onclickTodoForm = (e) => {
   const formContainer = document.querySelector("[data-todo-id]");
-  const activeTodoFormBtn = document.querySelector(".add-todo-form.active")
+  const activeTodoFormBtn = document.querySelector(".add-todo-form.active");
 
   if (formContainer) {
     const idBtn = e.target.dataset.projectBtnId;
@@ -260,13 +260,13 @@ const onclickEditTodo = (e) => {
 };
 
 let items = [];
-function store(projectName) {
-    items.push(projectName);
-    localStorage.setItem("item", JSON.stringify(items));
+function storeData(projectName) {
+  items.push(projectName);
+  localStorage.setItem("projects", JSON.stringify(items));
 }
-
-const saveData = (projectName) => {
-  localStorage.setItem("projectName", projectName)
+function getData() {
+  const dataProjects = localStorage.getItem("projects");
+  return dataProjects ? JSON.parse(dataProjects) : null;
 }
 
 /* Capitalize First Letter */
@@ -284,8 +284,8 @@ export {
   expandTodo,
   onclickEditTodo,
   toggleActiveClass,
-  saveData,
   items,
-  store,
+  storeData,
+  getData,
   projects,
 };

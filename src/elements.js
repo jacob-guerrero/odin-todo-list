@@ -5,9 +5,9 @@ import {
   expandTodo,
   onclickEditTodo,
   toggleActiveClass,
-  saveData,
   items,
-  store,
+  storeData,
+  getData,
   projects,
 } from "./logic";
 
@@ -19,9 +19,14 @@ const createProjectElement = () => {
   if (projectName === "") {
     projectName = "Project";
   }
-  
-  //saveData(projectName);
-  store(projectName);
+
+  storeData(projectName);
+  if (items.length === 1) {
+    const name = getData();
+    projectName = name[0];
+    console.log(projectName);
+  }
+  /* Allow function above to create many projects!!!!! */
 
   // Create Project
   const divProject = document.createElement("div");
