@@ -88,7 +88,7 @@ const onclickProjectBtn = (() => {
   btnAddProject.addEventListener("click", (e) => {
     e.preventDefault();
 
-    createProjectElement();
+    createProjectElement(false, "");
     addProject(createProject());
     console.log(projects);
   });
@@ -269,13 +269,28 @@ function getData() {
   return dataProjects ? JSON.parse(dataProjects) : null;
 }
 
+function createElementsFromLocalStorage() {
+  const data = getData();
+  if (data) {
+    data.forEach(projectName => {
+      items.push(projectName);
+      createProjectElement(true, projectName);
+      addProject(createProject());
+    });
+  }
+}
+
 /* Capitalize First Letter */
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // Default:
-document.querySelector(".add-project").click();
+if(localStorage.length === 0) {
+  document.querySelector(".add-project").click();
+} else {
+  createElementsFromLocalStorage();
+}
 
 export {
   onclickTodoForm,

@@ -13,22 +13,21 @@ import {
 
 const container = document.querySelector("#content");
 
-const createProjectElement = () => {
+const createProjectElement = (isLocal, localName) => {
   let projectName = document.querySelector("#project").value;
 
   if (projectName === "") {
     projectName = "Project";
   }
 
-  storeData(projectName);
-  if (items.length === 1) {
-    const name = getData();
-    projectName = name[0];
-    console.log(projectName);
+  // Create Projects saved on LocalStore:
+  if(isLocal) {
+    projectName = localName;
+  } else {
+    storeData(projectName);
   }
-  /* Allow function above to create many projects!!!!! */
 
-  // Create Project
+  // Create Project:
   const divProject = document.createElement("div");
   divProject.classList.add("project");
   divProject.dataset.projectId = projects.length;
