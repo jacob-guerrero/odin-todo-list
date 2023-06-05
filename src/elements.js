@@ -5,9 +5,8 @@ import {
   expandTodo,
   onclickEditTodo,
   toggleActiveClass,
-  items,
   storeData,
-  getData,
+  updateTodoData,
   projects,
 } from "./logic";
 
@@ -294,6 +293,8 @@ const modifyTodoElement = (e) => {
       todoDate,
       todoPrior
     );
+
+    updateTodoData();
   }
 };
 

@@ -3,4 +3,3 @@ import { btn } from "./elements";
 import "./style.css"
 
 console.log(projects);
-console.log(items.length);

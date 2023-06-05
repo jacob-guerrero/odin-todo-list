@@ -14,6 +14,8 @@ const createTodo = (title, description, dueDate, priority) => {
 
 const addTodo = (index, ...todo) => {
   projects[index].push(...todo);
+  
+  updateTodoData();
 };
 
 const createProject = () => {
@@ -58,6 +60,8 @@ const removeTodo = (index, indexParent) => {
 
   projects[indexParent].splice(index, 1);
   parentTodo.querySelector(`[data-todo-item-id = "${index}"] `).remove();
+
+  updateTodoData();
 };
 
 const updateTodoIndex = (index, indexParent) => {
@@ -277,6 +281,9 @@ function deleteData(index) {
     localStorage.setItem('projects', JSON.stringify(data));
   }
 }
+function updateTodoData() {
+  localStorage.setItem("todos", JSON.stringify(projects));
+}
 
 function createElementsFromLocalStorage() {
   const data = getData();
@@ -308,8 +315,7 @@ export {
   expandTodo,
   onclickEditTodo,
   toggleActiveClass,
-  items,
   storeData,
-  getData,
+  updateTodoData,
   projects,
 };
