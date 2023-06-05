@@ -104,6 +104,7 @@ const onclickDeleteProject = (e) => {
 
   removeProject(indexDeleteProject);
   updateProjectIndex(indexDeleteProject);
+  deleteData(indexDeleteProject);
 };
 
 const toggleActiveClass = (e) => {
@@ -267,6 +268,14 @@ function storeData(projectName) {
 function getData() {
   const dataProjects = localStorage.getItem("projects");
   return dataProjects ? JSON.parse(dataProjects) : null;
+}
+function deleteData(index) {
+  const data = JSON.parse(localStorage.getItem('projects'));
+  if (data && data.length > index) {
+    data.splice(index, 1);
+    items.splice(index, 1);
+    localStorage.setItem('projects', JSON.stringify(data));
+  }
 }
 
 function createElementsFromLocalStorage() {

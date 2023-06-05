@@ -20,7 +20,7 @@ const createProjectElement = (isLocal, localName) => {
     projectName = "Project";
   }
 
-  // Create Projects saved on LocalStore:
+  // Create Projects saved on LocalStorage:
   if(isLocal) {
     projectName = localName;
   } else {
