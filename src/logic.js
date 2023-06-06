@@ -12,10 +12,13 @@ const createTodo = (title, description, dueDate, priority) => {
   return { title, description, dueDate, priority, sayTask };
 };
 
-const addTodo = (index, ...todo) => {
-  projects[index].push(...todo);
-  
-  updateTodoData();
+const addTodo = (index, todo, isLocal) => {
+  projects[index].push(todo);
+
+  // Update todo in local storage:
+  if (!isLocal) {
+    updateTodoData();
+  }
 };
 
 const createProject = () => {
@@ -61,6 +64,7 @@ const removeTodo = (index, indexParent) => {
   projects[indexParent].splice(index, 1);
   parentTodo.querySelector(`[data-todo-item-id = "${index}"] `).remove();
 
+  // Update todo in local storage:
   updateTodoData();
 };
 
@@ -95,6 +99,8 @@ const onclickProjectBtn = (() => {
     createProjectElement(false, "");
     addProject(createProject());
     console.log(projects);
+
+    // Fix local storage when delete project
   });
 
   btnCloseProject.addEventListener("click", () => {
@@ -145,8 +151,9 @@ const onclickTodoForm = (e) => {
   }
 };
 
-const manageTodo = (index) => {
-  const todoElement = createTodoElement(index);
+// Create Todo Element, Add Todo to Project:
+const manageTodo = (index, isLocal, localTodoIndex) => {
+  const todoElement = createTodoElement(index, isLocal, localTodoIndex);
   const todo = createTodo(
     todoElement.todoName,
     todoElement.todoDesc,
@@ -154,9 +161,10 @@ const manageTodo = (index) => {
     todoElement.todoPrior
   );
 
-  addTodo(index, todo);
+  addTodo(index, todo, isLocal);
 };
 
+// Click "Add Todo" Button:
 const onclickTodoBtn = () => {
   const btnAddTodo = document.querySelectorAll(".add-todo");
 
@@ -166,7 +174,7 @@ const onclickTodoBtn = () => {
 
       const index = e.target.dataset.todoBtnId;
 
-      manageTodo(index);
+      manageTodo(index, false, null);
       console.log(projects);
     });
   });
@@ -274,11 +282,11 @@ function getData() {
   return dataProjects ? JSON.parse(dataProjects) : null;
 }
 function deleteData(index) {
-  const data = JSON.parse(localStorage.getItem('projects'));
+  const data = JSON.parse(localStorage.getItem("projects"));
   if (data && data.length > index) {
     data.splice(index, 1);
     items.splice(index, 1);
-    localStorage.setItem('projects', JSON.stringify(data));
+    localStorage.setItem("projects", JSON.stringify(data));
   }
 }
 function updateTodoData() {
@@ -287,12 +295,25 @@ function updateTodoData() {
 
 function createElementsFromLocalStorage() {
   const data = getData();
+  let i = 0;
   if (data) {
-    data.forEach(projectName => {
+    data.forEach((projectName) => {
       items.push(projectName);
       createProjectElement(true, projectName);
       addProject(createProject());
     });
+
+    if (JSON.parse(localStorage.getItem("todos"))) {
+      const numOfProjects = JSON.parse(localStorage.getItem("todos"));
+
+      for (let i = 0; i < numOfProjects.length; i++) {
+        const todosInProject = JSON.parse(localStorage.getItem("todos"))[i];
+
+        for (let j = 0; j < todosInProject.length; j++) {
+          manageTodo(i, true, j);
+        }
+      }
+    }
   }
 }
 
@@ -302,7 +323,7 @@ function capitalizeFirstLetter(string) {
 }
 
 // Default:
-if(localStorage.length === 0) {
+if (localStorage.length === 0) {
   document.querySelector(".add-project").click();
 } else {
   createElementsFromLocalStorage();

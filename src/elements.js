@@ -20,7 +20,7 @@ const createProjectElement = (isLocal, localName) => {
   }
 
   // Create Projects saved on LocalStorage:
-  if(isLocal) {
+  if (isLocal) {
     projectName = localName;
   } else {
     storeData(projectName);
@@ -41,7 +41,7 @@ const createProjectElement = (isLocal, localName) => {
   // Project Elements:
   const titleProject = document.createElement("h2");
   titleProject.textContent = projectName;
-  titleProject.classList.add("project-title")
+  titleProject.classList.add("project-title");
   const btnAddTodo = document.createElement("button");
   btnAddTodo.classList.add("add-todo-form");
   btnAddTodo.dataset.projectBtnId = projects.length;
@@ -148,12 +148,28 @@ const createTodoForm = (e) => {
   divProjectContainer.append(divTodo);
 };
 
-const createTodoElement = (index) => {
+const createTodoElement = (index, isLocal, localTodoIndex) => {
+  let todoName;
+  let todoDesc;
+  let todoDate;
+  let todoPrior;
+
   // Assign Values to the Element:
-  const todoName = document.querySelector("#todo").value;
-  const todoDesc = document.querySelector("#todo-desc").value;
-  const todoDate = document.querySelector("#todo-date").value;
-  const todoPrior = document.querySelector("#todo-prior").value;
+  if (isLocal) {
+    todoName = JSON.parse(localStorage.getItem("todos"))[index][localTodoIndex]
+      .title;
+    todoDesc = JSON.parse(localStorage.getItem("todos"))[index][localTodoIndex]
+      .description;
+    todoDate = JSON.parse(localStorage.getItem("todos"))[index][localTodoIndex]
+      .dueDate;
+    todoPrior = JSON.parse(localStorage.getItem("todos"))[index][localTodoIndex]
+      .priority;
+  } else {
+    todoName = document.querySelector("#todo").value;
+    todoDesc = document.querySelector("#todo-desc").value;
+    todoDate = document.querySelector("#todo-date").value;
+    todoPrior = document.querySelector("#todo-prior").value;
+  }
 
   // Create Todo:
   const divTodo = document.createElement("div");
@@ -294,6 +310,7 @@ const modifyTodoElement = (e) => {
       todoPrior
     );
 
+    // Update todo in local storage:
     updateTodoData();
   }
 };
