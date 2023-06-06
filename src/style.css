@@ -288,7 +288,7 @@ body {
 }
 
 /* Hide content */
-.hide-content/* , .show-todo.active, .show-form  */{
+.hide-content, .show-todo.active, .show-form {
   max-height: 0;
   overflow: hidden;
   /* Fix transition delay: */

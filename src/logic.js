@@ -32,6 +32,9 @@ const addProject = (project) => {
 const removeProject = (index) => {
   projects.splice(index, 1);
   document.querySelector(`[data-project-id = "${index}"] `).remove();
+
+  // Update todo in local storage:
+  updateTodoData();
 };
 
 const updateProjectIndex = (index) => {
@@ -63,9 +66,6 @@ const removeTodo = (index, indexParent) => {
 
   projects[indexParent].splice(index, 1);
   parentTodo.querySelector(`[data-todo-item-id = "${index}"] `).remove();
-
-  // Update todo in local storage:
-  updateTodoData();
 };
 
 const updateTodoIndex = (index, indexParent) => {
@@ -83,6 +83,7 @@ const updateTodoIndex = (index, indexParent) => {
 
 const projects = [];
 
+// Initial state:
 const onclickProjectBtn = (() => {
   const btnNewProject = document.querySelector(".new-project");
   const btnAddProject = document.querySelector(".add-project");
@@ -109,12 +110,18 @@ const onclickProjectBtn = (() => {
   });
 })();
 
+// Remove Project, Update Project Index:
 const onclickDeleteProject = (e) => {
   const indexDeleteProject = e.target.dataset.closeBtnId;
 
   removeProject(indexDeleteProject);
   updateProjectIndex(indexDeleteProject);
+
+  // Update local storage:
+  // Projects:
   deleteData(indexDeleteProject);
+  // Todos:
+  updateTodoData();
 };
 
 const toggleActiveClass = (e) => {
@@ -128,6 +135,7 @@ const removeFormIfExist = (formContainer) => {
   formContainer.remove();
 };
 
+// Create Form, Change Form to another Project:
 const onclickTodoForm = (e) => {
   const formContainer = document.querySelector("[data-todo-id]");
   const activeTodoFormBtn = document.querySelector(".add-todo-form.active");
@@ -140,7 +148,9 @@ const onclickTodoForm = (e) => {
       toggleActiveClass(e);
     } else {
       removeFormIfExist(formContainer);
-      activeTodoFormBtn.classList.remove("active");
+      if(activeTodoFormBtn) {
+        activeTodoFormBtn.classList.remove("active");
+      }
     }
   }
 
@@ -180,6 +190,7 @@ const onclickTodoBtn = () => {
   });
 };
 
+// Remove Todo, Update Todo Index:
 const onclickDeleteTodo = (e) => {
   const indexDeleteTodo = e.target.dataset.closeTodoId;
   const indexParentTodo = e.target.closest(".project").dataset.projectId;
@@ -204,6 +215,7 @@ const expandTodo = (e) => {
   });
 };
 
+// Change Todo Info to Inputs:
 const onclickEditTodo = (e) => {
   const todoContainer = e.target.closest(".todo");
 
@@ -272,6 +284,7 @@ const onclickEditTodo = (e) => {
   todoContainer.querySelector(".option-container").removeChild(edit);
 };
 
+// Manage Local Storage:
 let items = [];
 function storeData(projectName) {
   items.push(projectName);
